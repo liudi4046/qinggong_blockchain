@@ -3,12 +3,12 @@ use sha2::{Digest, Sha256};
 #[derive(Debug)]
 
 pub struct Block {
-    hash: [u8; 32],
+    pub hash: [u8; 32],
     pub pre_hash: [u8; 32],
-    timestamp: u64,
-    transactions: Vec<Transaction>,
-    difficulty: u64,
-    nonce: u64,
+    pub timestamp: u64,
+    pub transactions: Vec<Transaction>,
+    pub difficulty: u64,
+    pub nonce: u64,
 }
 impl Block {
     pub fn new(
