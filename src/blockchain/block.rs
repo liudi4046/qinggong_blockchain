@@ -27,7 +27,7 @@ impl Block {
         }
     }
 
-    pub fn cal_hash_and_nonce(&mut self) -> ([u8; 32], u64) {
+    pub fn cal_hash_and_nonce(&self) -> ([u8; 32], u64) {
         let mut nonce = 0;
         loop {
             let mut hasher = Sha256::new();
