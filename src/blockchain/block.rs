@@ -17,17 +17,20 @@ impl Block {
         transactions: Vec<Transaction>,
         difficulty: u64,
     ) -> Block {
-        Block {
+        let mut block = Block {
             hash: [0; 32],
             pre_hash,
             timestamp,
             transactions,
             difficulty,
             nonce: 0,
-        }
+        };
+        let (hash, nonce) = block.cal_hash_and_nonce();
+        block.update_block(hash, nonce);
+        block
     }
 
-    pub fn cal_hash_and_nonce(&self) -> ([u8; 32], u64) {
+    fn cal_hash_and_nonce(&self) -> ([u8; 32], u64) {
         let mut nonce = 0;
         loop {
             let mut hasher = Sha256::new();
@@ -46,7 +49,7 @@ impl Block {
         }
     }
 
-    pub fn update_block(&mut self, hash: [u8; 32], nonce: u64) {
+    fn update_block(&mut self, hash: [u8; 32], nonce: u64) {
         self.hash = hash;
         self.nonce = nonce;
     }
